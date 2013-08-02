@@ -88,5 +88,6 @@ def getNegativeAandB():
 	  		else:
 	  			if len(p) > longest:
 	  				print a, b, a*b, "Length:" + str(len(p))
+
 getAandB()
 getNegativeAandB()
