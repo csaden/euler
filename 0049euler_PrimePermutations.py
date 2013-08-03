@@ -8,7 +8,7 @@
 
 # What 12-digit number do you form by concatenating the three terms in this sequence?
 
-from itertools import combinations, permutations
+from itertools import permutations
 
 def sundaram3(max_n):
     numbers = range(3, max_n+1, 2)
@@ -25,25 +25,49 @@ def sundaram3(max_n):
 
 primes = sundaram3(10000)
 
-def isPrime(number):
+def isNotPrime(number):
 	global primes
 	if number in primes:
-		return True
-	else:
 		return False
+	else:
+		return True
 
-def isPerumtation(numbers):
-	pass
+def isTripleOfPerumtations(numbers):
+    firstPerm = str(numbers[0])
+    stringPerms = [p for p in permutations(firstPerm)]
+    intPerms = []
+    for s in stringPerms:
+        joinedString = ''.join(s)
+        intPerms.append(int(joinedString))
+    for i in range(1, len(numbers)):
+        if numbers[i] not in intPerms:       
+            return False
+    return True
+
+def hasConstantDifference(nums):
+    triples = []
+    n = len(nums)
+    for i in range(0, n):
+        if nums[i] < 3000:
+            for j in range(i+1, n):
+                for k in range(j+1, n):
+                    if nums[j] - nums[i] == nums[k] - nums[j]:
+                        triple = [nums[i], nums[j], nums[k]]
+                        if isTripleOfPerumtations(triple):
+                         triples.append(triple)
+    return triples
 
 fourDigitPrimes = []
-
 for p in primes:
 	if len(str(p)) == 4:
 		fourDigitPrimes.append(p)
 
-print fourDigitPrimes
+answers = hasConstantDifference(fourDigitPrimes)
+print answers
 
-x = list(combinations(fourDigitPrimes, 3))
-print x[0]
-print type(x[0])
-print type(x[0][0])
+solution = ''
+for primeElement in answers[1]:
+    z = str(primeElement)
+    solution += z
+print solution
+
