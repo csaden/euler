@@ -14,3 +14,34 @@
 # be formed as the concatenated product of an integer
 # with (1,2, ... , n) where n > 1?
 
+def isPandigital(n):
+	digits = [digit for digit in n]
+	digits = sorted(digits)
+	if digits == ['1','2','3','4','5','6','7','8','9']:
+		return True
+	else:
+		return False
+
+def isThreeDigits():
+	solutions = []
+	for n in range(100, 1000):
+		num = str(n * 1) + str(n * 2) + str(n * 3)
+		if len(num) != 9:
+			continue
+		if isPandigital(num):
+			solutions.append(num)
+	return max(solutions)
+
+def isOneDigit():
+	solutions = []
+	for n in range(1, 10):
+		num = str(n * 1) + str(n * 2) + str(n * 3) + str(n * 4) + str(n * 5) 
+		if len(num) != 9:
+			continue
+		if isPandigital(num):
+			solutions.append(num)
+	return max(solutions)
+
+
+print isThreeDigits()
+print isOneDigit()
