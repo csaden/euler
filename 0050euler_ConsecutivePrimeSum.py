@@ -32,7 +32,6 @@ def getPrimeSum():
 		for i in range(0, runs):
 			s = sum(primes[i:length-runs+i])
 			if s in primes:
-				print "THE ANSWER IS RIGHT ABOVE THIS LINE"
 				return "Prime Number " + str(s), "Run " + str(runs), "i " + str(i)
 
 print getPrimeSum()
