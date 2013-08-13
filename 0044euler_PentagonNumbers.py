@@ -23,10 +23,14 @@ def isPentagonal(a, b):
 
 pents = getPentagonalNumbers(10000)
 
-print pents
+print len(pents)
 
-for i in range(0, len(pents)):
-	for j in range(i+1, len(pents)):
-		if isPentagonal(pents[i], pents[j]):
-			print a, b, b - a
-			break
+def getMorePents(l):
+	for i in range(0, len(l)):
+	 	for j in range(i+1, len(l)):
+	 		first = l[i]
+	 		second = l[j]
+ 			if isPentagonal(first, second):
+ 				print first, second, second - first
+ 	return "DONE"
+getMorePents(pents)
