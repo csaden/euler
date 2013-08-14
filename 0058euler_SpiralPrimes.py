@@ -20,46 +20,59 @@
 # spiral for which the ratio of primes along both diagonals
 # first falls below 10%?
 
+# Don't create spiral. Generate the diagonal numbers instead.
 
-def moves(n, pos):
-	if n % 4 == 0:
-		pos[1] += 1
-		return pos
-	elif n % 4 == 1:
-		pos[0] += 1
-		return pos
-	elif n % 4 == 2:
-		pos[1] -= 1
-		return pos
-	else:
-		pos[0] -= 1
-		return pos
+# def moves(n, pos):
+# 	if n % 4 == 0:
+# 		pos[1] += 1
+# 		return pos
+# 	elif n % 4 == 1:
+# 		pos[0] += 1
+# 		return pos
+# 	elif n % 4 == 2:
+# 		pos[1] -= 1
+# 		return pos
+# 	else:
+# 		pos[0] -= 1
+# 		return pos
+# 
+# def createSpiral(num):
+# 	pos = [(num-1)/2, (num-1)/2]
+# 	largest = num * num
+# 	spiral = [[0 for r in range (0, num)] for c in range(0, num)]
+# 	spiral[(num-1)/2][(num-1)/2] = 1
+# 
+# 	direction = 0
+# 	current = 1
+# 	occurences = 1
+# 
+# 	while current < largest and occurences <= num-1:
+# 		for a in range(0, 2):
+# 			for b in range(0, occurences):
+# 				current += 1
+# 				pos = moves(direction, pos)
+# 				spiral[pos[0]][pos[1]] = current 
+# 			direction+= 1
+# 		occurences += 1
+	# 
+# 	direction += 1
+# 	for c in range(0, num - 1):
+# 		current += 1
+# 		pos = moves(direction, pos)
+# 		spiral[pos[1]][pos[0]] = current
+# 	return spiral
 
-def createSpiral(num):
-	pos = [(num-1)/2, (num-1)/2]
-	largest = num * num
-	spiral = [[0 for r in range (0, num)] for c in range(0, num)]
-	spiral[(num-1)/2][(num-1)/2] = 1
+def getDiagonalNumbers(n):
+	diagNums = [1]
+	primeNums
+	for i in range(3, n, 2):
+		a = (i * i) - (3 * i) + 3
+		b = (i * i) - (2 * i) + 2
+		c = (i * i) - i + 1
+		d = i * i
+		cornerNums = [a,b,c,d]
 
-	direction = 0
-	current = 1
-	occurences = 1
 
-	while current < largest and occurences <= num-1:
-		for a in range(0, 2):
-			for b in range(0, occurences):
-				current += 1
-				pos = moves(direction, pos)
-				spiral[pos[0]][pos[1]] = current 
-			direction+= 1
-		occurences += 1
-	
-	direction += 1
-	for c in range(0, num - 1):
-		current += 1
-		pos = moves(direction, pos)
-		spiral[pos[1]][pos[0]] = current
-	return spiral
 
 def sundaram3(max_n):
     numbers = range(3, max_n+1, 2)
@@ -74,7 +87,7 @@ def sundaram3(max_n):
         if initial > half:
             return [2] + filter(None, numbers)
 
-primes = sundaram3(10000000)
+primes = sundaram3(1000000)
 
 def isPrime(n):
 	global primes
@@ -101,14 +114,14 @@ def getDiagonalPrimesRatio(spiral):
 
 def findN():
 	notfound = True
-	n = 7
+	n = 5
 	while notfound:
 		s = createSpiral(n)
 		r = getDiagonalPrimesRatio(s)
 		print n, r
-		if r < .1:
+		if r < .095:
 			print "******************HERE'S THE ANSWER******************"
 			print n, r
 			notfound = False
-		n += 1
+		n += 2
 findN()
