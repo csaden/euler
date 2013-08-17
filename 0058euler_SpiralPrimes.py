@@ -62,18 +62,6 @@
 # 		spiral[pos[1]][pos[0]] = current
 # 	return spiral
 
-def getDiagonalNumbers(n):
-	diagNums = [1]
-	primeNums
-	for i in range(3, n, 2):
-		a = (i * i) - (3 * i) + 3
-		b = (i * i) - (2 * i) + 2
-		c = (i * i) - i + 1
-		d = i * i
-		cornerNums = [a,b,c,d]
-
-
-
 def sundaram3(max_n):
     numbers = range(3, max_n+1, 2)
     half = (max_n)//2
@@ -87,7 +75,7 @@ def sundaram3(max_n):
         if initial > half:
             return [2] + filter(None, numbers)
 
-primes = sundaram3(1000000)
+primes = sundaram3(50000000)
 
 def isPrime(n):
 	global primes
@@ -95,33 +83,44 @@ def isPrime(n):
 		return True
 	return False
 
-def getDiagonalPrimesRatio(spiral):
-	n = len(spiral)
-	diagDownRightPrimes = 0
-	for i in range(0, n):
-		for j in range(0, n):
-			if i == j:
-				if isPrime(spiral[i][j]):
-					diagDownRightPrimes += 1
-	diagUpRightPrimes = 0
-	i, j = 0, n-1
-	for z in range(0, n):
-		if isPrime(spiral[j][i]):
-			diagUpRightPrimes += 1
-		j -= 1
-		i += 1
-	return (diagDownRightPrimes + diagUpRightPrimes) / (2*n - 1.0)
+# def getDiagonalPrimesRatio(spiral):
+# 	n = len(spiral)
+# 	diagDownRightPrimes = 0
+# 	for i in range(0, n):
+# 		for j in range(0, n):
+# 			if i == j:
+# 				if isPrime(spiral[i][j]):
+# 					diagDownRightPrimes += 1
+# 	diagUpRightPrimes = 0
+# 	i, j = 0, n-1
+# 	for z in range(0, n):
+# 		if isPrime(spiral[j][i]):
+# 			diagUpRightPrimes += 1
+# 		j -= 1
+# 		i += 1
+# 	return (diagDownRightPrimes + diagUpRightPrimes) / (2*n - 1.0)
 
 def findN():
-	notfound = True
+	found = False
 	n = 5
-	while notfound:
-		s = createSpiral(n)
-		r = getDiagonalPrimesRatio(s)
-		print n, r
-		if r < .095:
-			print "******************HERE'S THE ANSWER******************"
-			print n, r
-			notfound = False
+	RATIO = .1
+	primesOnDiagonals = 5
+	diagNums = 9.0
+	while not found:
 		n += 2
+		diagNums += 4
+		a = (n * n) - (3 * n) + 3
+		b = (n * n) - (2 * n) + 2
+		c = (n * n) - n + 1
+		d = n * n
+		cornerNums = [a,b,c,d]
+		for num in cornerNums:
+			if isPrime(num):
+				primesOnDiagonals += 1
+		r = primesOnDiagonals / diagNums
+		print n, r
+		if r < RATIO:
+			print n
+			found = True
+
 findN()

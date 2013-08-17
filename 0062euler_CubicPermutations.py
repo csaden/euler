@@ -11,7 +11,7 @@
 from itertools import permutations
 
 def getCubes():
-	return [n**3 for n in range(1, 10000)]
+	return [n**3 for n in range(1, 1000000)]
 
 def getPermutations(n):
 	global cubes
