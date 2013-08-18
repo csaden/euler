@@ -22,16 +22,6 @@ def isPandigital(n):
 	else:
 		return False
 
-def isThreeDigits():
-	solutions = []
-	for n in range(100, 1000):
-		num = str(n * 1) + str(n * 2) + str(n * 3)
-		if len(num) != 9:
-			continue
-		if isPandigital(num):
-			solutions.append(num)
-	return max(solutions)
-
 def isOneDigit():
 	solutions = []
 	for n in range(1, 10):
@@ -40,8 +30,50 @@ def isOneDigit():
 			continue
 		if isPandigital(num):
 			solutions.append(num)
-	return max(solutions)
+	return None if len(solutions) == 0 else max(solutions)
 
+def isTwoDigit():
+	solutions = []
+	for n in range(10, 99):
+		num = str(n * 1) + str(n * 2) + str(n * 3) + str(n * 4)
+		if len(num) != 9:
+			continue
+		if isPandigital(num):
+			solutions.append(num)
+	return None if len(solutions) == 0 else max(solutions)
 
-print isThreeDigits()
+def isThreeDigits():
+	solutions = []
+	for n in range(100, 1000):
+		num = str(n * 1) + str(n * 2) + str(n * 3)
+		if len(num) != 9:
+			continue
+		if isPandigital(num):
+			solutions.append(num)
+	return None if len(solutions) == 0 else max(solutions)
+
+def isFourDigits():
+	solutions = []
+	for n in range(10, 10000):
+		num = str(n * 1) + str(n * 2)
+		if len(num) != 9:
+			continue
+		if isPandigital(num):
+			solutions.append(num)
+	return None if len(solutions) == 0 else max(solutions)
+
+def isFiveDigits():
+	solutions = []
+	for n in range(10, 10000):
+		num = str(n * 1) + str(n * 2)
+		if len(num) != 9:
+			continue
+		if isPandigital(num):
+			solutions.append(num)
+	return None if len(solutions) == 0 else max(solutions)
+
 print isOneDigit()
+print isTwoDigit()
+print isThreeDigits()
+print isFourDigits()
+print isFiveDigits()

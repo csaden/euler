@@ -22,83 +22,7 @@
 
 # Don't create spiral. Generate the diagonal numbers instead.
 
-# def moves(n, pos):
-# 	if n % 4 == 0:
-# 		pos[1] += 1
-# 		return pos
-# 	elif n % 4 == 1:
-# 		pos[0] += 1
-# 		return pos
-# 	elif n % 4 == 2:
-# 		pos[1] -= 1
-# 		return pos
-# 	else:
-# 		pos[0] -= 1
-# 		return pos
-# 
-# def createSpiral(num):
-# 	pos = [(num-1)/2, (num-1)/2]
-# 	largest = num * num
-# 	spiral = [[0 for r in range (0, num)] for c in range(0, num)]
-# 	spiral[(num-1)/2][(num-1)/2] = 1
-# 
-# 	direction = 0
-# 	current = 1
-# 	occurences = 1
-# 
-# 	while current < largest and occurences <= num-1:
-# 		for a in range(0, 2):
-# 			for b in range(0, occurences):
-# 				current += 1
-# 				pos = moves(direction, pos)
-# 				spiral[pos[0]][pos[1]] = current 
-# 			direction+= 1
-# 		occurences += 1
-	# 
-# 	direction += 1
-# 	for c in range(0, num - 1):
-# 		current += 1
-# 		pos = moves(direction, pos)
-# 		spiral[pos[1]][pos[0]] = current
-# 	return spiral
-
-def sundaram3(max_n):
-    numbers = range(3, max_n+1, 2)
-    half = (max_n)//2
-    initial = 4
-
-    for step in xrange(3, max_n+1, 2):
-        for i in xrange(initial, half, step):
-            numbers[i-1] = 0
-        initial += 2*(step+1)
-
-        if initial > half:
-            return [2] + filter(None, numbers)
-
-primes = sundaram3(50000000)
-
-def isPrime(n):
-	global primes
-	if n in primes:
-		return True
-	return False
-
-# def getDiagonalPrimesRatio(spiral):
-# 	n = len(spiral)
-# 	diagDownRightPrimes = 0
-# 	for i in range(0, n):
-# 		for j in range(0, n):
-# 			if i == j:
-# 				if isPrime(spiral[i][j]):
-# 					diagDownRightPrimes += 1
-# 	diagUpRightPrimes = 0
-# 	i, j = 0, n-1
-# 	for z in range(0, n):
-# 		if isPrime(spiral[j][i]):
-# 			diagUpRightPrimes += 1
-# 		j -= 1
-# 		i += 1
-# 	return (diagDownRightPrimes + diagUpRightPrimes) / (2*n - 1.0)
+from euler import is_prime
 
 def findN():
 	found = False
@@ -112,10 +36,9 @@ def findN():
 		a = (n * n) - (3 * n) + 3
 		b = (n * n) - (2 * n) + 2
 		c = (n * n) - n + 1
-		d = n * n
-		cornerNums = [a,b,c,d]
+		cornerNums = [a,b,c]
 		for num in cornerNums:
-			if isPrime(num):
+			if is_prime(num):
 				primesOnDiagonals += 1
 		r = primesOnDiagonals / diagNums
 		print n, r
