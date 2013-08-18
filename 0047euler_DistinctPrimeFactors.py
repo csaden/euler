@@ -13,3 +13,14 @@
 # 
 # Find the first four consecutive integers to have four distinct
 # prime factors. What is the first of these numbers?
+
+from euler import is_prime, factor
+
+def prime_factors(factorList):
+	return len(factorList)==4
+
+print factor(10)
+print factor(125)
+print factor(644)
+print factor(645)
+print factor(656)

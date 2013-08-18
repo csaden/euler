@@ -10,6 +10,23 @@
 # two primes concatenate to produce another prime.
 
 from itertools import combinations
+from euler import is_prime
+
+def getConcatenated(primes):
+	forward = [str(primes[i]) for i in range(0, len(primes))]
+	for i in range(0, len(primes)):
+		for j in range(i+1, len(primes)):
+			twoNums = int(forward[i] + forward[j])
+			if not is_prime(twoNums):
+				return False
+	for i in range(len(primes)-1, -1, -1):
+		for j in range(i-1, -1, -1):
+			backNums = int(forward[i]+forward[j])
+			if not is_prime(backNums):
+				return False
+	return True
+
+print getConcatenated((3,7,109,673))
 
 def sundaram3(max_n):
     numbers = range(3, max_n+1, 2)
@@ -23,30 +40,6 @@ def sundaram3(max_n):
 
         if initial > half:
             return [2] + filter(None, numbers)
-
-PRIMES = sundaram3(10000000)
-
-def isPrime(n):
-	global PRIMES
-	if int(n) in PRIMES:
-		return True
-	return False
-
-def getConcatenated(primes):
-	forward = [str(primes[i]) for i in range(0, len(primes))]
-	for i in range(0, len(primes)):
-		for j in range(i+1, len(primes)):
-			twoNums = forward[i] + forward[j]
-			if not isPrime(twoNums):
-				return False
-	for i in range(len(primes)-1, -1, -1):
-		for j in range(i-1, -1, -1):
-			backNums = forward[i]+forward[j]
-			if not isPrime(backNums):
-				return False
-	return True
-
-print getConcatenated((3,7,109,673))
 
 def getCombinationsFive(primeList):
 	for c in combinations(primeList, 5):

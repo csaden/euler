@@ -30,12 +30,7 @@
 # NOTE: Wording was modified slightly on 24 April 2007 to
 # emphasise the theoretical nature of Lychrel numbers.
 
-def isPalindrome(n):
-	n = str(n)
-	backwards = n[::-1]
-	if n != backwards:
-		return False
-	return True
+from euler import is_palindromic
 
 def reverseAdd(n):
 	num = str(n)
@@ -44,22 +39,18 @@ def reverseAdd(n):
 	return n + b
 
 def isLychrel(n):
-	i = 49
-	while i >= 0:
-		n = reverseAdd(n)
-		i -= 1
-		if isPalindrome(n):
+	number = n
+	for i in range(1, 51):
+		number = reverseAdd(number)
+		if is_palindromic(number):
 			return False
 	return True
 
 lychrels =[]
 
-for x in range(1,10000):
-	if x % 10 == 0:
-		continue
-	if isLychrel(x):
-		print x
-		lychrels.append(x)
+for num in range(1,10000):
+	if isLychrel(num):
+		lychrels.append(num)
 
 print lychrels
 print len(lychrels)

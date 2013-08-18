@@ -11,13 +11,13 @@
 from itertools import permutations
 
 def getCubes():
-	return set([n**3 for n in range(1, 1000000)])
+	return [n**3 for n in range(1, 10000)]
 
 def getPermutations(n):
 	global cubes
 	n = str(n)
 	permutes = set([int("".join(p)) for p in permutations(n)])
-	return set([p for p in permutes if p in cubes])
+	return set([p for p in permutes if p in set(cubes)])
 
 cubes = getCubes()
 
