@@ -17,10 +17,12 @@
 from euler import is_prime, factor
 
 def prime_factors(factorList):
-	return len(factorList)==4
+	return len(factorList) == 4 
 
-print factor(10)
-print factor(125)
-print factor(644)
-print factor(645)
-print factor(656)
+notFound = True
+n = 1
+while notFound:
+	if prime_factors(factor(n)) and prime_factors(factor(n+1)) and prime_factors(factor(n+2)) and prime_factors(factor(n+3)):
+		print n
+		break
+	n += 1
