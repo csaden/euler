@@ -11,7 +11,7 @@
 from itertools import permutations
 
 def getCubes():
-	return [n**3 for n in range(1, 10000)]
+	return [n**3 for n in range(1, 751)]
 
 def getPermutations(n):
 	global cubes
@@ -23,9 +23,9 @@ cubes = getCubes()
 
 for x in cubes:
 	print x
-	if len(getPermutations(x)) != 5:
-		continue
-	else:
+	if len(getPermutations(x)) == 5:
 		print "THE ANSWER IS BELOW"
 		print x
 		break
+	else:
+		continue
