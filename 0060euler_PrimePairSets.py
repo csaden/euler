@@ -9,24 +9,16 @@
 # Find the lowest sum for a set of five primes for which any
 # two primes concatenate to produce another prime.
 
-from itertools import combinations
+from itertools import permutations, combinations
 from euler import is_prime
 
 def getConcatenated(primes):
-	forward = [str(primes[i]) for i in range(0, len(primes))]
-	for i in range(0, len(primes)):
-		for j in range(i+1, len(primes)):
-			twoNums = int(forward[i] + forward[j])
-			if not is_prime(twoNums):
-				return False
-	for i in range(len(primes)-1, -1, -1):
-		for j in range(i-1, -1, -1):
-			backNums = int(forward[i]+forward[j])
-			if not is_prime(backNums):
-				return False
+	primes = [str(prime) for prime in primes]
+	conCats = [int(''.join(p)) for p in permutations(primes, 2)]
+	for c in conCats:
+		if not is_prime(c):
+			return False
 	return True
-
-print getConcatenated((3,7,109,673))
 
 def sundaram3(max_n):
     numbers = range(3, max_n+1, 2)
@@ -41,13 +33,13 @@ def sundaram3(max_n):
         if initial > half:
             return [2] + filter(None, numbers)
 
-def getCombinationsFive(primeList):
-	for c in combinations(primeList, 5):
+def getCombinationsFive(primes):
+	for c in combinations(primes, 5):
 		print c
 		if getConcatenated(c):
 			return c, sum(c)
 
-p = sundaram3(1000)
+p = sundaram3(10000)
 p.remove(2)
 p.remove(5)
 getCombinationsFive(p)

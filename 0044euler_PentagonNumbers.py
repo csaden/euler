@@ -4,7 +4,7 @@
 # 1, 5, 12, 22, 35, 51, 70, 92, 117, 145, ...
  
 # It can be seen that P4 + P7 = 22 + 70 = 92 = P8.
-# However, their difference, 70 - 22 =48, is not pentagonal.
+# However, their difference, 70 - 22 = 48, is not pentagonal.
  
 # Find the pair of pentagonal numbers, Pj and Pk,
 # for which their sum and difference are pentagonal
