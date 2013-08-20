@@ -21,23 +21,19 @@
 # values of L <= 1,500,000 can exactly one integer sided
 # right angle triangle be formed?
 
-import math, numbers
-
-
-def isRightTriangle(a,b,c):
-	return a ** 2 + b ** 2 == c ** 2
-
 def generateTriples(n):
-	triples = {}
+	triples = set()
 	for a in range(1, n):
-		for b in range(a, n):
-			c = math.floor(math.sqrt(a ** 2 + b ** 2))
-			if isRightTriangle(a,b,c):
-				if a in triples.keys():
-					del(triples[a])
-					a += 1
-				else:
-					triples[a] = (a,b,c)
+		b = a + 1
+		c = b + 1
+		while c <= n:
+			while c**2 < a**2 + b**2:
+				c += 1
+			if a**2 + b**2 == c**2 and c <= n:
+				print (a,b,c)
+				triples.add(a)
+				print triples
+			b += 1
 	return triples
 
 T = generateTriples(1000001)
