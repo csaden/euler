@@ -12,15 +12,21 @@ def power_of_two():
 	power = 1
 	for n in range(1, 7830458):
 		power *= 2
-		power = str(power)
-		if len(power) > 10:
-			power = power[:-11:-1]
-			power = power[::-1]
-			power = int(power)
-	power = int(power)
+		power = trim(power)
 	return power
 
-p = power_of_two()
-nMprime = (p * 28433) + 1
-print nMprime
+def trim(n):
+	num = str(n)
+	if len(num) > 10:
+		last_ten_digits = num[:-11:-1]
+		last_ten_digits = last_ten_digits[::-1]
+		return int(last_ten_digits)
+	else:
+		return n
 
+digits = power_of_two()
+print digits
+last_ten = digits*28433 + 1
+print last_ten
+answer = str(last_ten)
+print answer
