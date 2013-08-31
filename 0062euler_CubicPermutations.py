@@ -8,24 +8,40 @@
 # Find the smallest cube for which exactly five permutations
 # of its digits are cube.
 
-from itertools import permutations
+from itertools import permutations, chain
 
-def getCubes():
-	return [n**3 for n in range(1, 751)]
+cubes = {}
+results = {}
 
-def getPermutations(n):
-	global cubes
-	n = str(n)
-	permutes = set([int("".join(p)) for p in permutations(n)])
-	return set([p for p in permutes if p in set(cubes)])
+def getLargest(n):
+	strN = str(n)
+	digits = [d for d in strN]
+	digits = "".join(digit for digit in chain(sorted(digits, reverse=True)))
+	return int(digits)
 
-cubes = getCubes()
+def generateCubes():
+ 	n = 1
+ 	while 5 not in results.values():
+ 		cube = n * n * n
+ 		print n, cube
+ 		maxPerm = getLargest(cube)
+ 		if maxPerm not in results.keys():
+ 			results[maxPerm] = 1
+ 			cubes[maxPerm] = [n]
+ 			print results[maxPerm]
+ 			n += 1
+ 		else:
+ 			results[maxPerm] += 1
+ 			cubes[maxPerm].append(n)
+			print results[maxPerm]
+ 			n += 1
+ 	for k, v in results.iteritems():
+ 		if v == 5:
+ 			return k
 
-for x in cubes:
-	print x
-	if len(getPermutations(x)) == 5:
-		print "THE ANSWER IS BELOW"
-		print x
-		break
-	else:
-		continue
+iD = generateCubes()
+print iD
+print cubes[iD]
+smallN = cubes[iD][0]
+answer = smallN ** 3
+print answer

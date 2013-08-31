@@ -13,9 +13,10 @@
 # How many starting numbers below ten million will arrive at 89?
 
 leadsTo89 = set()
+leadsTo1 = set()
 
 def squareChain(n):
-	global leadsTo89
+	global leadsTo89, leadsTo1
 	unique = True
 	terms = set([n])
 	while unique: 
@@ -23,21 +24,20 @@ def squareChain(n):
 		newTerm = 0
 		for digit in digits:
 			newTerm += digit ** 2
-		if newTerm == 89:
+		print newTerm, terms
+		if newTerm == 89 or newTerm in leadsTo89:
 			leadsTo89 = leadsTo89 | terms
 			return 89
-		elif newTerm in leadsTo89:
-			leadsTo89 = leadsTo89 | terms
-			return 89
-		elif newTerm in terms:
-			return newTerm
+		elif newTerm == 1 or newTerm in leadsTo1:
+			leadsTo1 = leadsTo1	| terms
+			return 1
 		else:
 			terms.add(newTerm)
 			n = newTerm
 
 chains89 = 0
-for x in range(1,10000000):
-	if squareChain(x) == 89:
+for num in numbers:
+	if squareChain(num) == 89:
 		chains89 += 1
 
 print chains89
