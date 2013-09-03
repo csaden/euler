@@ -12,6 +12,17 @@
 from itertools import permutations, combinations
 from euler import is_prime
 
+def digitSum(number):
+	total = 0
+	while number > 0:
+		digit = number % 10
+		total += digit
+	return total
+
+print digitSum(311)
+print digitSum(711)
+print digitSum(7109)
+
 def getConcatenated(primes):
 	primes = [str(prime) for prime in primes]
 	conCats = [int(''.join(p)) for p in permutations(primes, 2)]
